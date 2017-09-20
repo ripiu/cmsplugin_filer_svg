@@ -6,4 +6,4 @@ from django.utils.translation import ugettext_lazy as _
 
 class FilerSvgConfig(AppConfig):
     name = 'ripiu.cmsplugin_filer_svg'
-    verbose_name = _('django filer SVG')
+    verbose_name = _('SVG images')
