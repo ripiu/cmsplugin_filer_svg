@@ -5,7 +5,7 @@ from ripiu.cmsplugin_filer_svg import __version__
 setup(
     name='ripiu.cmsplugin_filer_svg',
     version=__version__,
-    url='https://github.com/ripiu/ripiu.cmsplugin_filer_svg',
+    url='https://github.com/ripiu/cmsplugin_filer_svg',
     license='BSD-new',
     description='Use SVG images in a Django-cms site',
     long_description=open('README.rst').read(),
