@@ -1,5 +1,7 @@
 from cms.models import CMSPlugin
+from cms.models.fields import PageField
 from filer.fields.file import FilerFileField
+from djangocms_attributes_field.fields import AttributesField
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -43,6 +45,13 @@ class FilerSvgImagePluginModel(SVGPluginModel):
     An SVG image
     """
 
+    LINK_TARGET = (
+        ('_blank', _('Open in new window')),
+        ('_self', _('Open in same window')),
+        ('_parent', _('Delegate to parent')),
+        ('_top', _('Delegate to top')),
+    )
+
     # see cmsplugin_filer_image.models.FilerImage
     alt_text = models.CharField(
         _("alt text"), null=False, blank=False, max_length=255
@@ -51,6 +60,42 @@ class FilerSvgImagePluginModel(SVGPluginModel):
     width = models.PositiveIntegerField(_('width'), null=True, blank=True)
 
     height = models.PositiveIntegerField(_('height'), null=True, blank=True)
+
+    # link models
+    link_url = models.URLField(
+        verbose_name=_('External URL'),
+        blank=True,
+        max_length=2040,
+        help_text=_('Wraps the image in a link to an external URL.'),
+    )
+
+    link_page = PageField(
+        verbose_name=_('Internal URL'),
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
+        help_text=_('Wraps the image in a link to an internal (page) URL.'),
+    )
+
+    link_target = models.CharField(
+        verbose_name=_('Link target'),
+        choices=LINK_TARGET,
+        blank=True,
+        max_length=255,
+    )
+
+    link_attributes = AttributesField(
+        verbose_name=_('Link attributes'),
+        blank=True,
+        excluded_keys=['href', 'target'],
+    )
+
+    def get_link(self):
+        if self.link_url:
+            return self.link_url
+        if self.link_page_id:
+            return self.link_page.get_absolute_url(language=self.language)
+        return False
 
     def __str__(self):
         return self.alt_text

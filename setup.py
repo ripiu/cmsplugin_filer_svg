@@ -1,5 +1,4 @@
 from setuptools import setup
-
 from ripiu.cmsplugin_filer_svg import __version__
 
 setup(
