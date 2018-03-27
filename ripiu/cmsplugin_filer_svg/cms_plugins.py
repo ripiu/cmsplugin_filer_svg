@@ -34,7 +34,8 @@ class FilerSvgImagePlugin(CMSPluginBase):
         (_('Link settings'), {
             'classes': ('collapse',),
             'fields': (
-                ('link_url', 'link_page'),
+                ('link_page', 'link_url'),
+                ('link_mailto', 'link_phone',),
                 'link_target',
                 'link_attributes',
             )

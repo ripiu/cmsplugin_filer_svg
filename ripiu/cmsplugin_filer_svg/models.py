@@ -66,7 +66,6 @@ class FilerSvgImagePluginModel(SVGPluginModel):
         verbose_name=_('External URL'),
         blank=True,
         max_length=2040,
-        help_text=_('Wraps the image in a link to an external URL.'),
     )
 
     link_page = PageField(
@@ -74,7 +73,18 @@ class FilerSvgImagePluginModel(SVGPluginModel):
         blank=True,
         null=True,
         on_delete=models.SET_NULL,
-        help_text=_('Wraps the image in a link to an internal (page) URL.'),
+    )
+
+    link_mailto = models.EmailField(
+        verbose_name=_('Email address'),
+        blank=True,
+        max_length=255,
+    )
+
+    link_phone = models.CharField(
+        verbose_name=_('Phone'),
+        blank=True,
+        max_length=255,
     )
 
     link_target = models.CharField(
@@ -91,10 +101,18 @@ class FilerSvgImagePluginModel(SVGPluginModel):
     )
 
     def get_link(self):
-        if self.link_url:
-            return self.link_url
         if self.link_page_id:
             return self.link_page.get_absolute_url(language=self.language)
+        if self.link_url:
+            return self.link_url
+        if self.link_mailto:
+            return 'mailto:%(address)s' % {
+                'address': self.link_mailto,
+            }
+        if self.link_phone:
+            return 'tel:%(number)s' % {
+                'number': self.link_phone,
+            }
         return False
 
     def __str__(self):
