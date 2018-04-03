@@ -11,7 +11,6 @@ import djangocms_attributes_field.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cms', '0018_pagenode'),
         ('cmsplugin_filer_svg', '0002_filersvginlinepluginmodel'),
     ]
 
