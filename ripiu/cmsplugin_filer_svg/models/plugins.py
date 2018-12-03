@@ -1,10 +1,11 @@
 from cms.models import CMSPlugin
 from cms.models.fields import PageField
-from filer.fields.file import FilerFileField
 from djangocms_attributes_field.fields import AttributesField
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+
+from .fields import FilerSVGField
 
 
 class SVGPluginModel(CMSPlugin):
@@ -12,7 +13,7 @@ class SVGPluginModel(CMSPlugin):
     Base SVG plugin model
     """
 
-    file = FilerFileField(
+    file = FilerSVGField(
         blank=False, null=False, verbose_name=_('SVG file'),
         help_text=_('Provide an SVG file')
     )
@@ -26,14 +27,8 @@ class FilerSvgInlinePluginModel(SVGPluginModel):
     An inline SVG image
     """
 
-    def get_svg_code(self):
-        try:
-            return self.file.file.read()
-        except IOError:
-            return ''
-
     def __str__(self):
-        return u'Inline SVG'
+        return 'Inline SVG'
 
     class Meta:
         verbose_name = _('Inline SVG image')

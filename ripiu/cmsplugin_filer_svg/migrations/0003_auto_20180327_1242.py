@@ -3,9 +3,10 @@
 from __future__ import unicode_literals
 
 import cms.models.fields
-from django.db import migrations, models
-import django.db.models.deletion
 import djangocms_attributes_field.fields
+
+import django.db.models.deletion
+from django.db import models, migrations
 
 
 class Migration(migrations.Migration):

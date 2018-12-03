@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+0.3.0 (unreleased)
+------------------
+
+* Wrote a custom file model for SVG files
+* Switched to a custom field to reference SVG files in CMS plugins
+
 0.2.2 (2018-04-03)
 ------------------
 
