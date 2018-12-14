@@ -14,6 +14,7 @@ class SVGPluginModel(CMSPlugin):
     """
 
     file = FilerSVGField(
+        on_delete=models.CASCADE,
         blank=False, null=False, verbose_name=_('SVG file'),
         help_text=_('Provide an SVG file')
     )
