@@ -19,7 +19,10 @@ class SVG(File):
     @property
     def contents(self):
         """SVG file contents"""
+        data = ''
         try:
-            return self.file.read()
+            data = self.file.read()
+            self.file.close()
         except IOError:
-            return ''
+            pass
+        return data
