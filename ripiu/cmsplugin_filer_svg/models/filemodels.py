@@ -21,7 +21,7 @@ class SVG(File):
         """SVG file contents"""
         data = ''
         try:
-            data = self.file.read()
+            data = self.file.read().decode()
             self.file.close()
         except IOError:
             pass
