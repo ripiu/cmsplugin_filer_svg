@@ -2,7 +2,7 @@ import os
 
 from filer.models.filemodels import File
 
-# from filer import settings as filer_settings
+from django.utils.translation import ugettext_lazy as _
 
 
 class SVG(File):
@@ -26,3 +26,7 @@ class SVG(File):
         except IOError:
             pass
         return data
+
+    class Meta:
+        verbose_name = _('SVG file')
+        verbose_name_plural = _('SVG files')
