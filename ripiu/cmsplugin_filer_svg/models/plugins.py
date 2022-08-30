@@ -3,7 +3,7 @@ from cms.models.fields import PageField
 from djangocms_attributes_field.fields import AttributesField
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .fields import FilerSVGField
 
